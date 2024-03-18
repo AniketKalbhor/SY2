@@ -50,8 +50,7 @@ int dequeue()
         printf("Queue is empty\n");
         return -1;
     }
-
-    int val = temp->vertex;
+    int value = temp->vertex;
 
     if (front == rear)
     {
@@ -59,17 +58,15 @@ int dequeue()
         rear = NULL;
     }
     else
-    {
         front = front->next;
-    }
 
     free(temp);
-    return val;
+    return value;
 }
 
-void BFS(struct Node* a[10], int v)
+void BFS(struct Node* a[MAX], int v)
 {
-    int visited[10], st, u, i;
+    int visited[MAX], st, u, i;
     for (i = 0; i < v; i++)
         visited[i] = 0;
 
@@ -125,9 +122,9 @@ int pop()
     return stack[top--];
 }
 
-void DFS(struct Node* a[10], int v)
+void DFS(struct Node* a[MAX], int v)
 {
-    int visited[15], i, u, st;
+    int visited[MAX], i, u, st;
     struct Node* p;
     for (i = 0; i < v; i++)
         visited[i] = 0;
@@ -164,13 +161,31 @@ void DFS(struct Node* a[10], int v)
     } while (!emptyStack());
 }
 
+void display_list(struct Node* a[MAX], int v)
+{
+    int i;
+    struct Node* p;
+    printf("\nAdjacency list:\n");
+    for (i = 0; i < v; i++)
+    {
+        p = a[i];
+        printf("%d", i);
+        while (p != NULL)
+        {
+            printf("->%d", p->vertex);
+            p = p->next;
+        }
+        printf("\n");
+    }
+}
+
 int main()
 {
     struct Node* p;
     struct Node* newV;
     int u, v, vertex,e, i;
     char ch;
-    printf("Enter the number of vertices\n");
+    printf("Enter the number of vertices: ");
     scanf("%d", &vertex);
     for (int i = 0; i < vertex; i++)
         a[i] = NULL;
@@ -213,6 +228,7 @@ int main()
     int choice;
     while (1)
     {
+        display_list(a, vertex);
         printf("\n1. DFS using adj list\n2. BFS using adj list\n3. Exit\n");
         scanf("%d",&choice);
         switch (choice)
