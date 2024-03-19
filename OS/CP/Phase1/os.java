@@ -20,6 +20,7 @@ public class os{
         }
     }
     public void start_exe() {
+        IC = 0;
         while (true) {
             for (int i = 0; i < 4; i++) {
                 IR[i] = M[IC][i];
@@ -37,6 +38,39 @@ public class os{
                 System.out.println("***************************");
                 MOS();
             }
+            else if(IR[0] == 'L' && IR[1] == 'R'){
+                int i = IR[2] - 48;
+                i = i * 10;
+                for(int j=0;j<4;j++){
+                    R[j] = M[i][j];
+                }
+                System.out.println("LR, load register");
+            }
+            else if(IR[0] == 'S' && IR[1] == 'R'){
+                int i = IR[2] - 48;
+                i = i * 10;
+                for(int j=0;j<4;j++){
+                    M[i][j] = R[j];
+                }
+                System.out.println("SR, store register");
+            }
+            else if(IR[0] == 'C' && IR[1] == 'R'){
+                int i = IR[2] - 48;
+                i = i * 10;
+                if(M[i].equals(R)){
+                    C = true;
+                }
+                else{
+                    C = false;
+                }
+                System.out.println("CR, compare register");
+            }
+            else if(IR[0] == 'B' && IR[1] == 'T'){
+                if(C){
+                    IC = (IR[2] - 48) * 10;
+                    System.out.println("BT, branched-true");
+                }
+            }
             else if(IR[0] == 'H'){
                 SI = 3;
                 System.out.println("H, halt");
@@ -53,6 +87,9 @@ public class os{
         if(SI == 1){
             // for(int i=0;i<40;i++)
             //     buffer[i] = '\0';
+            for(int i=0;i<4;i++){
+                IR[i] = 'ඞ';
+            }
             System.out.println("Read from input device");
             int x = 0;
             int count = 4;
@@ -76,6 +113,9 @@ public class os{
             }
         }
         else if(SI == 2){
+            for(int i=0;i<4;i++){
+                IR[i] = 'ඞ';
+            }
             System.out.println("PD, Write to output device: ");
             int i = IR[2] - 48;
             i = i * 10;
@@ -142,6 +182,7 @@ public class os{
                         count++;
                     }
                     System.out.println("We got buffer: " + new String(buffer));
+                    
                     if (buffer[0]=='$' && buffer[1]=='A' && buffer[2]=='M' && buffer[3]=='J'){
                         SI = 1;
                         init();
@@ -149,12 +190,10 @@ public class os{
                         System.out.println("AMJ, initialised memory and registers");
                         break;
                     }
+                    
                     else if (buffer[0]=='$' && buffer[1]=='D' && buffer[2]=='T' && buffer[3]=='A'){
                         count = 0;
                         s = sc.nextLine();
-                        while (C) {
-                            
-                        }
                         for(int j=0;j<40;j++){
                             if (count < s.length()) {
                                 buffer[j] = s.charAt(count);
@@ -165,24 +204,33 @@ public class os{
                                 break;
                             }
                         }
+                        
                         System.out.println("DTA, started execution");
                         start_exe();
                         break;
                     }
+                    
                     else if (buffer[0]=='$' && buffer[1]=='E' && buffer[2]=='N' && buffer[3]=='D'){
                         SI = 3;
                         sc.close();
                         printMemory();
+                        MOS();
                         System.out.println("END, ended execution");
-                        return;
+                        break;
                     }
+                    
                     else{
                         for(int j=0;j<4;j++){
                             System.out.print(buffer[j]);
                             M[row][j] = buffer[j];
                             if (buffer[j]=='H') {
+                                row++;
                                break outer;
-                            //    break;
+                               //    break;
+                            }
+                            if (buffer[j]=='ඞ') {
+                               break outer;
+                               //    break;
                             }
                         }
                         row++;

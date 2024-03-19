@@ -1,0 +1,22 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "os",
+            "request": "launch",
+            "mainClass": "os",
+            "projectName": "SY2_bf8a3689"
+        },
+        {
+            "type": "java",
+            "name": "ref",
+            "request": "launch",
+            "mainClass": "OS.ref.rPhase1.ref",
+            "projectName": "SY2_bf8a3689"
+        }
+    ]
+}
