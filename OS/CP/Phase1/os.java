@@ -3,6 +3,7 @@ import java.io.*;
 
 public class os{
     char[][] M = new char[100][4];
+
     char[] IR = new char[4];
     char[] R = new char[4];
     int IC;

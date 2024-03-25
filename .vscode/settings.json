@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "/home/aniket/Desktop/SY2/OS/ref/rPhase1"
+    "cmake.sourceDirectory": "/home/aniket/Desktop/SY2/OS/ref/rPhase1",
+    "files.associations": {
+        "iosfwd": "cpp"
+    }
 }

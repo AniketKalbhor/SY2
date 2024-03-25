@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "buff",
+            "request": "launch",
+            "mainClass": "buff",
+            "projectName": "SY2_bf8a3689"
+        },
+        {
+            "type": "java",
+            "name": "temp",
+            "request": "launch",
+            "mainClass": "temp",
+            "projectName": "SY2_bf8a3689"
+        },
+        {
+            "type": "java",
             "name": "os",
             "request": "launch",
             "mainClass": "os",
