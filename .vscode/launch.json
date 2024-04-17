@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "os2",
+            "request": "launch",
+            "mainClass": "os2",
+            "projectName": "SY2_bf8a3689"
+        },
+        {
+            "type": "java",
+            "name": "os2",
+            "request": "launch",
+            "mainClass": "OS.CP.Phase2.os2",
+            "projectName": "SY2_bf8a3689"
+        },
+        {
+            "type": "java",
+            "name": "os",
+            "request": "launch",
+            "mainClass": "OS.CP.Phase2.os",
+            "projectName": "SY2_bf8a3689"
+        },
+        {
+            "type": "java",
             "name": "buff",
             "request": "launch",
             "mainClass": "buff",

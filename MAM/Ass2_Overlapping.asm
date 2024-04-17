@@ -6,8 +6,17 @@
 	syscall
 %endmacro
 
-section .data
+printName:
+    mov rax, 01h
+    mov rdi, 01h
+    mov rsi, name
+    mov rdx, nameLength
+    syscall      
+    ret 
 
+section .data
+name db 'Aniket Kalbhor - 48'
+nameLength equ $-name
 msg0 db 10,'How Many Array Elements :'
 len0 equ $-msg0
 
@@ -22,12 +31,7 @@ len4 equ $-msg4
 
 msg5 db 10,'Overlap Count :'
 len5 equ $-msg5
-
-
-
 space db ' '
-
-
 
 section .bss
 array resb 20
@@ -40,6 +44,7 @@ section .text
 	global _start
 
 _start:
+call printName
 
 	println msg0,len0
 	call acceptNo

@@ -6,19 +6,24 @@
 	syscall
 %endmacro
 
-section .data
-array db 07Fh,40h,3Fh,41h,80h
+printName:
+    mov rax, 01h
+    mov rdi, 01h
+    mov rsi, name
+    mov rdx, nameLength
+    syscall      
+    ret 
 
+section .data
+name db 'Aniket Kalbhor - 48'
+nameLength equ $-name
+array db 07Fh,40h,3Fh,41h,80h
 msg0 db 10,'Array Elements Are :: '
 len0 equ $-msg0
-
-
 msg1 db 10,'Positive no Count :: '
 len1 equ $-msg1
-
 msg2 db 10,'Negative no Count :: '
 len2 equ $-msg2
-
 msg3 db '   '
 len3 equ $-msg3
 
@@ -32,6 +37,7 @@ section .text
 	global _start
 
 _start:
+call printName
 
 	mov cl,05h
 	mov rsi,array

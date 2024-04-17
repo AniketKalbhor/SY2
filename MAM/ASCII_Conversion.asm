@@ -6,7 +6,17 @@
 	syscall
 %endmacro
 
+printName:
+    mov rax, 01h
+    mov rdi, 01h
+    mov rsi, name
+    mov rdx, nameLength
+    syscall      
+    ret 
+
 section .data
+name db 'Aniket Kalbhor - 48'
+nameLength equ $-name
 msg1 db 10,'Enter key :'
 len1 equ $-msg1
 
@@ -21,6 +31,7 @@ section .text
 	global _start
 
 _start:
+call printName
 
 	println msg1,len1
 	
