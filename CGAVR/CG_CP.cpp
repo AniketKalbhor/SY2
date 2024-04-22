@@ -105,7 +105,7 @@ void getPerpendicularCoordinates(int *x, int *y)
 }
 
 //write Distance between the nodes to screen
-void writeDistance(char *text, int x, int y)
+void writeDistance(const char *text, int x, int y)
 {	
 	if(instruction)
 		glColor3f(1.0, 1.0, 1.0);
