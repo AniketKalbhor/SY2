@@ -1,6 +1,5 @@
 #include<GL/glut.h>
 #include<stdio.h>
-#include<math.h>
 #include<string.h>
 #include<time.h>
 
@@ -51,6 +50,83 @@ struct node
 	int yCoordinate;
 }nodes[26], lineNodes[2], sourceNode, destinationNode;
 
+#include <math.h>  // For trigonometry in car movement 
+
+struct Car {
+    float x, y; // Position
+    float angle; // Rotation in degrees
+    int currentSegmentStart;
+    int currentSegmentEnd;
+    float progress;  // 0.0 to 1.0 along the current segment
+};
+
+struct Car car; // Global car object 
+
+void initCar() {
+    // Set initial position of the car (adjust as needed)
+    car.x = nodes[sourceNode.id].xCoordinate; 
+    car.y = nodes[sourceNode.id].yCoordinate;
+
+    // Set the initial angle (assuming facing the first segment)
+    if (nodeCount >= 2) {
+        car.angle = atan2(nodes[sourceNode.id + 1].yCoordinate - nodes[sourceNode.id].yCoordinate,
+                          nodes[sourceNode.id + 1].xCoordinate - nodes[sourceNode.id].xCoordinate) * 180.0f / PI;
+    } else {
+        car.angle = 0.0f; // Default facing right if not enough nodes
+    }
+
+    // Initialize path tracking
+    car.currentSegmentStart = sourceNode.id; 
+    car.currentSegmentEnd = sourceNode.id + 1; 
+    car.progress = 0.0f;  
+}
+
+void updateCar() {
+    float speed = 0.2; // Adjust speed as needed 
+    float dt = 0.016;  // Approximate time since last update (adjust based on your loop)
+
+    car.progress += speed * dt;
+
+    if (car.progress >= 1.0f) {
+        // Transition to the next segment (if there is one)
+        car.currentSegmentStart++; 
+        car.currentSegmentEnd++; 
+
+        // Handle reaching the destination
+        if (car.currentSegmentStart == destinationNode.id) {
+            printf("Car reached the destination!\n");
+            // Add any logic to stop the animation here if needed 
+        } 
+        car.progress = 0.0f; 
+    }
+
+    // Update car position based on progress along the current segment
+    float dx = nodes[car.currentSegmentEnd].xCoordinate - nodes[car.currentSegmentStart].xCoordinate;
+    float dy = nodes[car.currentSegmentEnd].yCoordinate - nodes[car.currentSegmentStart].yCoordinate;
+
+    car.x = nodes[car.currentSegmentStart].xCoordinate + dx * car.progress;
+    car.y = nodes[car.currentSegmentStart].yCoordinate + dy * car.progress; 
+
+     // Update car angle (assuming it should face the direction of travel)
+    car.angle = atan2(dy, dx) * 180.0f / PI; 
+}
+
+void drawCar() {
+    glPushMatrix();
+    glTranslatef(car.x, car.y, 0.0f);
+    glRotatef(car.angle, 0, 0, 1);
+
+    // Replace with vertices appropriate for your desired car image
+    glColor3f(1.0, 0.0, 0.0); // Make the car red 
+    glBegin(GL_QUADS); 
+        glVertex2f(-10.0f, -5.0f); // Adjust these values for your car shape
+        glVertex2f( 10.0f, -5.0f);
+        glVertex2f( 10.0f,  5.0f);
+        glVertex2f(-10.0f,  5.0f);
+    glEnd();
+
+    glPopMatrix();
+}
 
 //return distance between two nodes
 int computeDistance(struct node a, struct node b)
@@ -384,6 +460,7 @@ void myInit()
 	glColor3f(1.0, 1.0, 1.0);
 	// glPointSize(0);
 	 glLineWidth(5);
+     initCar(); // Initialize the car object
 }
 
 //Function to display instructions
@@ -399,12 +476,17 @@ void display_hello()
 //display function
 void myDisplay() 
 {
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-		display_hello();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		glFlush();
+    display_hello();  // Your existing function
 
+    updateCar(); // Update the car's position
+    drawCar();  // Draw the car
+
+    glutSwapBuffers(); // Make the updates visible
+    glutPostRedisplay(); // Trigger the display function again for animation 
 }
+
 
 //fix adjacency matrix: set the distance among the nodes to highest value (99999)
 void fixAdjMatrix()

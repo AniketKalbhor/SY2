@@ -9,7 +9,14 @@
                 "-g",
                 "${file}",
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-lGL",
+                "-lglfw",
+                "-lm",
+                "lglut",
+                "-lGLU",
+                "-lSOIL",
+                "-lstb_image"
             ],
             "options": {
                 "cwd": "${fileDirname}"

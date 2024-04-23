@@ -12,7 +12,12 @@
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}",
                 "-lGL",
-                "-lglfw"
+                "-lglfw",
+                "-lm",
+                "lglut",
+                "-lGLU",
+                "-lSOIL",
+                "-lstb_image"
             ],
             "options": {
                 "cwd": "${fileDirname}"
