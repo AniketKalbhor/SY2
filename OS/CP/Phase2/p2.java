@@ -39,7 +39,7 @@ class PCB {
     }
 }
 
-public class os2 extends PCB {
+public class p2 extends PCB {
 
     Random rand = new Random();
     public static final int MAX_MEMORY = 300;
@@ -65,8 +65,9 @@ public class os2 extends PCB {
     public void printMemory(){
         System.out.println("Memory:");    
         for(int i=0;i<MAX_MEMORY;i++){
-            for(int j=0;j<4;j++)
+            for(int j=0;j<4;j++){
                 System.out.print(M[i][j]);
+            }
             System.out.println();
         }
     }
@@ -81,7 +82,7 @@ public class os2 extends PCB {
         for(int i=0;i<4;i++){
             IR[i] = 'ඞ';
             R[i] = 'ඞ';
-            PTR[i] = 'ඞ';
+            PTR[i] = 0;
         }
         SI=3;
         TI=0;
@@ -153,16 +154,16 @@ public class os2 extends PCB {
         if (PI!=0)
             break;
             
-            for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
             IR[i] = M[RA][i];
-            IC[1]++;
-            
-            if(IC[1] == 10){
-                IC[0]++;
-                IC[1] = 0;
-            }
-            
-            System.out.println("IR: " + IR[0] + IR[1] + IR[2] + IR[3]);
+        IC[1]++;
+        
+        if(IC[1] == 10){
+            IC[1] = 0;
+            IC[0]++;
+        }
+        
+        System.out.println("IR: " + IR[0] + IR[1] + IR[2] + IR[3]);
             
         if(IR[0] == 'G' && IR[1] == 'D'){
             if('0'<=IR[3] && IR[3]<='9')
@@ -483,7 +484,7 @@ public class os2 extends PCB {
     }
     
     public static void main(String[] args) {
-        os2 job = new os2();
+        p2 job = new p2();
         job.load();
     }
 }

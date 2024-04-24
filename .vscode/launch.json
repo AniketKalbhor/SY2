@@ -6,6 +6,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "YashOS",
+            "request": "launch",
+            "mainClass": "YashOS",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
+            "name": "tempp2",
+            "request": "launch",
+            "mainClass": "OS.CP.Phase2.tempp2",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
+            "name": "temp",
+            "request": "launch",
+            "mainClass": "OS.CP.Phase2.temp",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
+            "name": "temp",
+            "request": "launch",
+            "mainClass": "temp",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
+            "name": "os",
+            "request": "launch",
+            "mainClass": "os",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
             "name": "os2",
             "request": "launch",
             "mainClass": "OS.CP.Phase2.os2",
