@@ -8,6 +8,13 @@
             "type": "java",
             "name": "Phase_2",
             "request": "launch",
+            "mainClass": "OS.CP.Phase2.Phase_2",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
+            "name": "Phase_2",
+            "request": "launch",
             "mainClass": "Phase_2",
             "projectName": "SY2_f214d5c4"
         },

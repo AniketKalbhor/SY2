@@ -474,7 +474,7 @@ class OS2{
     private static BufferedReader reader;
     static {
         try {
-            file = new java.io.File("/home/aniket-u22/SY2/OS/ref/rPhase 2/jinay/input.txt");
+            file = new java.io.File("/home/aniket-u22/SY2/OS/ref/rPhase 2/jinay/input1.txt");
             reader = new BufferedReader(new FileReader(String.valueOf(file)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -504,7 +504,8 @@ class OS2{
                     System.out.println("TLL: " + pcb.getTLL());
 
                     PTR = random.nextInt(30);
-                    // used_frames[PTR] = 1;
+                    used_frames[PTR] = 1;
+                    PTR = PTR * 10;
 
 
                     buffer_reset();
