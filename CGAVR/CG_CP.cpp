@@ -389,11 +389,11 @@ void myInit()
 //Function to display instructions
 void display_hello()
 {
-	writeDistance(" Welcome! To The Simulation of Dijkstra's Algorithn.", 200, 900);
-	writeDistance("#  Use Mouse Left Button to Create Nodes.", 250, 800);
-	writeDistance("#  Select any two Nodes to form a Path.", 250, 770);
-	writeDistance("#  Use Mouse Right Button to select Source and Destrination.", 250, 740);
-	writeDistance("#  Press ENTER key to begin Dijkstra's Algorithm.", 250, 710);
+	writeDistance("Simulation of Dijkstra's Algorithn- SY CSB 24", 200, 900);
+	// writeDistance("#  Use Mouse Left Button to Create Nodes.", 250, 800);
+	// writeDistance("#  Select any two Nodes to form a Path.", 250, 770);
+	// writeDistance("#  Use Mouse Right Button to select Source and Destrination.", 250, 740);
+	// writeDistance("#  Press ENTER key to begin Dijkstra's Algorithm.", 250, 710);
 }
 
 //display function
