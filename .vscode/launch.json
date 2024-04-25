@@ -34,24 +34,76 @@
         },
         {
             "type": "java",
+            "name": "Phase_2",
+            "request": "launch",
+            "mainClass": "Phase_2",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
+            "name": "YashOS",
+            "request": "launch",
+            "mainClass": "YashOS",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
+            "name": "tempp2",
+            "request": "launch",
+            "mainClass": "OS.CP.Phase2.tempp2",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
+            "name": "temp",
+            "request": "launch",
+            "mainClass": "OS.CP.Phase2.temp",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "type": "java",
             "name": "temp",
             "request": "launch",
             "mainClass": "temp",
-            "projectName": "SY2_bf8a3689"
+            "projectName": "SY2_f214d5c4"
         },
         {
             "type": "java",
             "name": "os",
             "request": "launch",
             "mainClass": "os",
-            "projectName": "SY2_bf8a3689"
+            "projectName": "SY2_f214d5c4"
         },
         {
             "type": "java",
-            "name": "ref",
+            "name": "os2",
             "request": "launch",
-            "mainClass": "OS.ref.rPhase1.ref",
-            "projectName": "SY2_bf8a3689"
+            "mainClass": "OS.CP.Phase2.os2",
+            "projectName": "SY2_f214d5c4"
+        },
+        {
+            "name": "(gdb) Launch",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${fileDirname}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                },
+                {
+                    "description": "Set Disassembly Flavor to Intel",
+                    "text": "-gdb-set disassembly-flavor intel",
+                    "ignoreFailures": true
+                }
+            ]
         }
     ]
 }

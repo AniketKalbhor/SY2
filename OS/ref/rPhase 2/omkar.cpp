@@ -1,4 +1,7 @@
 #include <bits/stdc++.h>
+#include <string.h>
+#include <iostream>
+#include <set>
 using namespace std;
 
 string IPFILE = "input1.txt";
@@ -22,98 +25,121 @@ void executeUserProgram();
 void startExecution();
 void SetPageTable(int PTR);
 void LOAD();
-void endExecution(int TTC, int TLC);
+void endExecution(int TTC, int TLC, int EM);
 
 struct PCB
 {
-    int TTL, TLL, TTC, TLC;
+    int id, TTL, TLL, TTC, TLC;
 };
 struct PCB jobs[10];
 
-void endExecution(int TTC, int TLC)
+void endExecution(int TTC, int TLC, int EM)
 {
     fstream fout;
     fout.open("output.txt");
     fout.seekg(0, ios::end);
-    if (EM == 0)
+
+    switch (EM)
     {
-        cout << "Program terminated normally!";
-        fout << "Program terminated normally!" << endl;
-        fout << "\nSI = " << SI << "  TI =" << TI << "  PI =" << PI << endl;
-        fout << "TTC = " << TTC << "  LLC =" << TLC << endl;
-        cout << "\nSI = " << SI << "  TI =" << TI << "  PI =" << PI << endl;
-        cout << "TTC = " << TTC << "  LLC =" << TLC << endl;
-        fout << "------------------------------------------------------------------" << endl
-             << endl;
-        fout.close();
-        return;
+    case 0:
+        cout << "JOB ID:" << jobs[cnt].id << endl;
+        cout << "No error" << endl;
+        cout << "TTC : " << jobs[cnt].TTC << endl;
+        cout << "TLC :" << jobs[cnt].TLC << endl;
+        cout << "Program Terminated normally !!" << endl;
+
+        fout << "JOB ID:" << jobs[cnt].id << endl;
+        fout << "No error" << endl;
+        fout << "TTC : " << jobs[cnt].TTC << endl;
+        fout << "TLC :" << jobs[cnt].TLC << endl;
+        fout << "Program Terminated normally !!" << endl;
+        // fout << "\n\n";
+        break;
+    case 1:
+        cout << "JOB ID:" << jobs[cnt].id << endl;
+        cout << "Out of Data error" << endl;
+        cout << "TTC : " << jobs[cnt].TTC << endl;
+        cout << "TLC :" << jobs[cnt].TLC << endl;
+        cout << "Program Terminated abnormally !!" << endl;
+
+        fout << "JOB ID:" << jobs[cnt].id << endl;
+        fout << "TTC : " << jobs[cnt].TTC << endl;
+        fout << "TLC :" << jobs[cnt].TLC << endl;
+        fout << "Program Terminated abnormally !!" << endl;
+        fout << "Out of Data error" << endl;
+        // fout << "\n\n";
+        break;
+    case 2:
+        cout << "JOB ID:" << jobs[cnt].id << endl;
+        cout << "Line Limit exceeded" << endl;
+        cout << "TTC : " << jobs[cnt].TTC << endl;
+        cout << "TLC :" << jobs[cnt].TLC << "  Expected TLL was " << jobs[cnt].TLL << endl;
+        cout << "Program Terminated abnormally !!" << endl;
+
+        fout << "JOB ID:" << jobs[cnt].id << endl;
+        fout << "Line Limit exceeded" << endl;
+        fout << "TTC : " << jobs[cnt].TTC << endl;
+        fout << "TLC :" << jobs[cnt].TLC << "  Expected TLL was " << jobs[cnt].TLL << endl;
+        fout << "Program Terminated abnormally !!" << endl;
+        // fout << "\n\n";
+        break;
+    case 3:
+        cout << "JOB ID:" << jobs[cnt].id << endl;
+        cout << "Time Limit exceeded" << endl;
+        cout << "TTC : " << jobs[cnt].TTC << "  Expected TTL was " << jobs[cnt].TTL << endl;
+        cout << "TLC :" << jobs[cnt].TLC << endl;
+        cout << "Program Terminated abnormally !!" << endl;
+
+        fout << "JOB ID:" << jobs[cnt].id << endl;
+        fout << "Time Limit exceeded" << endl;
+        fout << "TTC : " << jobs[cnt].TTC << "   Expected TTL was " << jobs[cnt].TTL << endl;
+        fout << "TLC :" << jobs[cnt].TLC << endl;
+        fout << "Program Terminated abnormally !!" << endl;
+        // fout << "\n\n";
+        break;
+    case 4:
+        cout << "JOB ID:" << jobs[cnt].id << endl;
+        cout << "Opcode Error" << endl;
+        cout << "TTC : " << jobs[cnt].TTC << endl;
+        cout << "TLC :" << jobs[cnt].TLC << endl;
+        cout << "Program Terminated abnormally !!" << endl;
+
+        fout << "JOB ID:" << jobs[cnt].id << endl;
+        fout << "Opcode Error" << endl;
+        fout << "TTC : " << jobs[cnt].TTC << endl;
+        fout << "TLC :" << jobs[cnt].TLC << endl;
+        fout << "Program Terminated abnormally !!" << endl;
+        // fout << "\n\n";
+        break;
+    case 5:
+        cout << "JOB ID:" << jobs[cnt].id << endl;
+        cout << "Operand Error" << endl;
+        cout << "TTC : " << jobs[cnt].TTC << endl;
+        cout << "TLC :" << jobs[cnt].TLC << endl;
+        cout << "Program Terminated abnormally !!" << endl;
+
+        fout << "JOB ID:" << jobs[cnt].id << endl;
+        fout << "Operand Error" << endl;
+        fout << "TTC : " << jobs[cnt].TTC << endl;
+        fout << "TLC :" << jobs[cnt].TLC << endl;
+        fout << "Program Terminated abnormally !!" << endl;
+        // fout << "\n\n";
+        break;
+    case 6:
+        cout << "JOB ID:" << jobs[cnt].id << endl;
+        cout << "Invalid Page Fault" << endl;
+        cout << "TTC : " << jobs[cnt].TTC << endl;
+        cout << "TLC :" << jobs[cnt].TLC << endl;
+        cout << "Program Terminated abnormally !!" << endl;
+
+        fout << "JOB ID:" << jobs[cnt].id << endl;
+        fout << "Invalid Page Fault" << endl;
+        fout << "TTC : " << jobs[cnt].TTC << endl;
+        fout << "TLC :" << jobs[cnt].TLC << endl;
+        fout << "Program Terminated abnormally !!" << endl;
+        // fout << "\n\n";
+        break;
     }
-    else if (EM == 6)
-    {
-        cout << "Invalid Page Fault. Program terminated abnormally!";
-        fout << "Invalid Page Fault. Program terminated abnormally!" << endl;
-        fout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-        fout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-        cout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-        cout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-        fout << "------------------------------------------------------------------" << endl
-             << endl;
-        fout.close();
-        return;
-    }
-    else if (EM == 1)
-    {
-        cout << "Out of Data. Program terminated abnormally!";
-        fout << "Out of Data. Program terminated abnormally!" << endl;
-        fout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-        fout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-        cout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-        cout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-        fout << "------------------------------------------------------------------" << endl
-             << endl;
-        fout.close();
-        return;
-    }
-    else if (EM == 4)
-    {
-        cout << "Opcode Error \n"
-             << "Program terminated abnormally!" << endl;
-        cout << "Job No " << job << " is not executed. \n";
-        fout << "Opcode Error \n"
-             << "Program terminated abnormally!" << endl;
-        fout << "Job No " << job << " is not executed. \n";
-        fout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-        fout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-        cout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-        cout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-        fout << "------------------------------------------------------------------" << endl
-             << endl;
-        fout.close();
-        return;
-    }
-    else if (EM == 5)
-    {
-        cout << "Operand Error \n"
-             << "Program terminated abnormally!" << endl;
-        cout << "Job No " << job << " is not executed. \n";
-        fout << "Operand Error \n"
-             << "Program terminated abnormally!" << endl;
-        fout << "Job No " << job << " is not executed. \n";
-        fout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-        fout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-        cout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-        cout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-        fout << "------------------------------------------------------------------" << endl
-             << endl;
-        fout.close();
-        return;
-    }
-    fout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-    fout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-    cout << "\nSI = " << SI << "  TI =" << TI << "  PI=" << PI << endl;
-    cout << "TTC = " << TTC << "  LLC=" << TLC << endl;
-    fout << "------------------------------------------------------------------" << endl
-         << endl;
 }
 
 void print_mem()
@@ -218,9 +244,9 @@ int AddressMap(int VA)
     {
 
         PI = 3;
-        // cout << "Page Fault occured." << endl;
+        cout << "Page Fault occured." << endl;
 
-        bool flag = true;
+        // bool flag = true;00
 
         int Entry = rand() % 30;
         if (random_numbers.find(Entry * 10) == random_numbers.end())
@@ -271,7 +297,10 @@ void executeUserProgram()
 
     while (1)
     {
-
+        if (jobs[cnt].TTC > jobs[cnt].TTL)
+        {
+            break;
+        }
         jobs[cnt].TTC++;
         string Opc_ins = "", Opr_ins = "";
         for (int i = 0; i < 4; i++)
@@ -297,6 +326,10 @@ void executeUserProgram()
         if (find(ins.begin(), ins.end(), Opc_ins) == ins.end())
         {
             PI = 1;
+        }
+        if (!((IR[2] >= '0' && IR[3] >= '0') && (IR[2] <= '9' && IR[3] <= '9')))
+        {
+            PI = 2;
             break;
         }
 
@@ -348,7 +381,6 @@ void executeUserProgram()
             else
                 C = true;
         }
-
         else if (IR[0] == 'S' && IR[1] == 'R')
         {
             for (int j = 0; j < 4; j++)
@@ -425,6 +457,7 @@ void LOAD()
             LineLimit = stoi(line.substr(12, 4));
 
             struct PCB CJob;
+            CJob.id = stoi(line.substr(4, 4));
             CJob.TTL = TTL;
             CJob.TLL = LineLimit;
             CJob.TTC = 0;
@@ -481,7 +514,6 @@ void LOAD()
                         k++;
                         continue;
                     }
-
                     else
                     {
                         Memory[k][b] = prog[j];
@@ -507,7 +539,7 @@ void LOAD()
             {
                 cout << "Out of Data Error! \n";
                 EM = 1;
-                endExecution(jobs[cnt].TTC, jobs[cnt].TLC);
+                endExecution(jobs[cnt].TTC, jobs[cnt].TLC, EM);
                 break;
             }
 
@@ -515,32 +547,35 @@ void LOAD()
 
             startExecution();
 
-            if (jobs[cnt].TTL < jobs[cnt].TTC)
+            if (jobs[cnt].TTC > jobs[cnt].TTL)
             {
                 fstream fout;
                 fout.open("output.txt");
                 fout.seekg(0, ios::end);
                 TI = 2;
-                cout << "Time Limit Exceeded! It took " << jobs[cnt].TTC << " units of time. Expected TTL was " << jobs[cnt].TTL << ".\n"
-                     << "Program terminated abnormally!" << endl;
-                fout << "Time Limit Exceeded! It took " << jobs[cnt].TTC << " units of time. Expected TTL was " << jobs[cnt].TTL << ".\n"
-                     << "Program terminated abnormally!" << endl;
-                EM = 3;
-                endExecution(jobs[cnt].TTC, jobs[cnt].TLC);
+                // fout << "Time Limit Exceeded! It took " << jobs[cnt].TTC << " units of time. Expected TTL was " << jobs[cnt].TTL << ".\n"
+                //      << "Program terminated abnormally!" << endl;
+                if (TI == 2 && SI == 3)
+                {
+                    EM = 0;
+                }
+                else
+                {
+                    EM = 3;
+                }
+                endExecution(jobs[cnt].TTC, jobs[cnt].TLC, EM);
                 fout.close();
             }
 
-            else if (jobs[cnt].TLL < jobs[cnt].TLC)
+            else if (jobs[cnt].TLC > jobs[cnt].TLL)
             {
                 fstream fout;
                 fout.open("output.txt");
                 fout.seekg(0, ios::end);
-                cout << "Line Limit Exceeded! It printed " << jobs[cnt].TLC << " lines. Expected Line Limit was " << jobs[cnt].TLL << ".\n"
-                     << "Program terminated abnormally!" << endl;
-                fout << "Line Limit Exceeded! It printed " << jobs[cnt].TLC << " lines. Expected Line Limit was " << jobs[cnt].TLL << ".\n"
-                     << "Program terminated abnormally!" << endl;
+                // fout << "Line Limit Exceeded! It printed " << jobs[cnt].TLC + 1 << " lines. Expected Line Limit was " << jobs[cnt].TLL << ".\n"
+                //      << "Program terminated abnormally!" << endl;
                 EM = 2;
-                endExecution(jobs[cnt].TTC, jobs[cnt].TLC);
+                endExecution(jobs[cnt].TTC, jobs[cnt].TLC, EM);
                 fout.close();
             }
 
@@ -549,9 +584,14 @@ void LOAD()
                 fstream fout;
                 fout.open("output.txt");
                 fout.seekg(0, ios::end);
-
+                cout << "Opcode Error \n"
+                     << "Program terminated abnormally!" << endl;
+                // cout << "Job No " << job << " is not executed. \n";
+                // fout << "Opcode Error \n"
+                //      << "Program terminated abnormally!" << endl;
+                // fout << "Job No " << job << " is not executed. \n";
                 EM = 4;
-                endExecution(jobs[cnt].TTC, jobs[cnt].TLC);
+                endExecution(jobs[cnt].TTC, jobs[cnt].TLC, EM);
                 fout.close();
             }
             else if (PI == 2)
@@ -559,15 +599,20 @@ void LOAD()
                 fstream fout;
                 fout.open("output.txt");
                 fout.seekg(0, ios::end);
-
+                cout << "Operand Error \n"
+                     << "Program terminated abnormally!" << endl;
+                // cout << "Job No " << job << " is not executed. \n";
+                // fout << "Operand Error \n"
+                //      << "Program terminated abnormally!" << endl;
+                // fout << "Job No " << job << " is not executed. \n";
                 EM = 5;
-                endExecution(jobs[cnt].TTC, jobs[cnt].TLC);
+                endExecution(jobs[cnt].TTC, jobs[cnt].TLC, EM);
                 fout.close();
             }
             else
             {
                 print_mem();
-                endExecution(jobs[cnt].TTC, jobs[cnt].TLC);
+                endExecution(jobs[cnt].TTC, jobs[cnt].TLC, EM);
             }
             job++;
             cnt++;

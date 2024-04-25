@@ -1,7 +1,7 @@
 import java.io.*;
 
 class FileReaderHelper{
-    public static final String filename = "/home/aniket/Desktop/SY Module 4/OS/CP Phase1/input2.txt";
+    public static final String filename = "/home/aniket-u22/SY2/OS/CP/Phase1/input2.txt";
     public static BufferedReader br;
     static {
         try {
