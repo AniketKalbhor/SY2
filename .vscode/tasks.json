@@ -8,6 +8,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 "${workspaceFolder}/*.cpp",
+<<<<<<< HEAD
                 "${workspaceFolder}/*.c",
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}"
@@ -29,8 +30,18 @@
                 "-fdiagnostics-color=always",
                 "-g3",
                 "${file}",
+=======
+                "${workspaceFolder}/glad/*.c",
+>>>>>>> 1332be3449f9dbb6e2f0050cea400e0a205f89f1
                 "-o",
-                "${fileDirname}/${fileBasenameNoExtension}"
+                "${fileDirname}/${fileBasenameNoExtension}",
+                "-lGL",
+                "-lglfw",
+                "-lm",
+                "lglut",
+                "-lGLU",
+                "-lSOIL",
+                "-lstb_image"
             ],
             "options": {
                 "cwd": "${fileDirname}"
