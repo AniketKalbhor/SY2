@@ -5,7 +5,7 @@ cake=0
 coffee=0
 iceCream=0
 choice=0
-price=( [pcake]=10 [pcoffee]=5 [piceCream]=3 )
+price=( [pcake]=3 [pcoffee]=3 [piceCream]=3 )
 echo "Welcome to the shop $name"
 echo "We have a total of ${#price[@]} items"
 echo "Price of cake: ${price[pcake]} Price of coffee: ${price[pcoffee]} Price of ice cream: ${price[piceCream]}"

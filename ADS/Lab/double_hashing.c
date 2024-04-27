@@ -3,7 +3,15 @@
 
 #define TABLE_SIZE 10
 
-int hashTable[TABLE_SIZE] = {0}; // Initialize all elements to 0
+int hashTable[TABLE_SIZE] = {0};
+
+void displayHashTable() {
+    printf("Hash Table:\n");
+    printf("Index\tValue\n");
+    for (int i = 0; i < TABLE_SIZE; i++) {
+        printf("%d\t%d\n", i, hashTable[i]);
+    }
+}
 
 int hash1(int key) {
     return key % TABLE_SIZE;
@@ -32,13 +40,6 @@ void insert(int key) {
     printf("Hash table is full. Element %d cannot be inserted.\n", key);
 }
 
-void displayHashTable() {
-    printf("Hash Table:\n");
-    printf("Index\tValue\n");
-    for (int i = 0; i < TABLE_SIZE; i++) {
-        printf("%d\t%d\n", i, hashTable[i]);
-    }
-}
 
 int main() {
     int choice, key;

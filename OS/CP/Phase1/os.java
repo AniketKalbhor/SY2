@@ -1,7 +1,7 @@
 import java.io.*;
 
 class FileReaderHelper{
-    public static final String filename = "OS/CP/Phase1/input1.txt";
+    public static final String filename = "/home/aniket/Desktop/SY2/OS/CP/Phase1/input2.txt";
     public static BufferedReader br;
     static {
         try {
@@ -25,9 +25,9 @@ public class os extends FileReaderHelper{
     boolean C;
     int SI;
     StringBuilder buffer = new StringBuilder(40);
-
+    
     public void printMemory(){
-        System.out.println("Memory:");
+        System.out.println("Memory:");    
         for(int i=0;i<MAX_MEMORY;i++){
             for(int j=0;j<4;j++)
                 System.out.print(M[i][j]);
@@ -60,15 +60,15 @@ public class os extends FileReaderHelper{
             else if(IR[0] == 'S' && IR[1] == 'R'){
                 int i = (IR[2] - 48)*10 + (IR[3] - 48);
                 for(int j=0;j<4;j++)
-                    M[i][j] = R[j];
+                M[i][j] = R[j];
                 System.out.println("SR, store register");
             }
             else if(IR[0] == 'C' && IR[1] == 'R'){
                 int i = (IR[2] - 48)*10 + (IR[3] - 48);
                 if(M[i].equals(R))
-                    C = true;
+                C = true;
                 else
-                    C = false;
+                C = false;
                 System.out.println("CR, compare register");
             }
             else if(IR[0] == 'B' && IR[1] == 'T'){
@@ -96,18 +96,18 @@ public class os extends FileReaderHelper{
         if(SI == 1){
             System.out.println("GD, Read from input device");
             try {
-                String data = readLine();
-                System.out.println("**Data:"+data);
-                buffer.append(data);
-                int i = (IR[2] - 48) * 10 + (IR[3] - 48);
-                int k = 0;
-                for (int j = 0; j < buffer.length() && j < 40; j++){
-                    M[i][k++] = buffer.charAt(j);
-                    if (k == 4){
-                        k = 0;
-                        i++;
-                    }
-                }}catch (IOException e) {
+            String data = readLine();
+            System.out.println("**********Data:"+data);
+            buffer.append(data);
+            int i = (IR[2] - 48) * 10 + (IR[3] - 48);
+            int k = 0;
+            for (int j = 0; j < buffer.length() && j < 40; j++){
+                M[i][k++] = buffer.charAt(j);
+                if (k == 4){
+                    k = 0;
+                    i++;
+                }
+            }}catch (IOException e) {
                 e.printStackTrace();
             }
         }
@@ -124,6 +124,15 @@ public class os extends FileReaderHelper{
                 }
                 i++;
             }
+            try {
+                FileWriter myWriter = new FileWriter("/home/aniket/Desktop/SY2/OS/CP/Phase1/output.txt");
+                myWriter.write(output);
+                myWriter.close();
+                System.out.println("Successfully wrote to the file.");
+                } catch (IOException e) {
+                System.out.println("An error occurred.");
+                e.printStackTrace();
+                }
             System.out.println(output);
         }
         else if(SI == 3){
@@ -151,16 +160,13 @@ public class os extends FileReaderHelper{
 
     public void load(){
         int block_index = 0;
-        // String filename = "input2.txt";
-        // File f = new File("/home/aniket/Desktop/SY Module 4/OS/CP Phase1/input2.txt");
-        // try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
         try{
             String line;
             // int i = 0;
             while ((line = readLine()) != null) {
                 System.out.println();
                 System.out.println("Line: " + line);
-
+                
                 buffer.append(line);
                 System.out.println("Buffer:"+ buffer);
                 if (buffer.substring(0, 4).equals("$AMJ")) {
@@ -176,10 +182,18 @@ public class os extends FileReaderHelper{
                 } else if (buffer.substring(0, 4).equals("$END")) {
                     SI = 3;
                     buffer.setLength(0);
-                    // br.close();
                     printMemory();
+                    try {
+                        FileWriter myWriter = new FileWriter("output.txt");
+                        myWriter.write("");
+                        myWriter.write("");
+                        myWriter.close();
+                        System.out.println("Successfully wrote to the file.");
+                        } catch (IOException e) {
+                        System.out.println("An error occurred.");
+                        e.printStackTrace();
+                        }
                     System.out.println("END, ended execution");
-                    break;
                 } else {
                     if (block_index > MAX_MEMORY){
                         System.out.println("Memory full");
@@ -195,11 +209,11 @@ public class os extends FileReaderHelper{
                                 break;
                             }
                             else
-                                M[i][j] = buffer.charAt(k++);
-                        }
-                    // block_index += 10;
-                    buffer.setLength(0);
-                }
+                            M[i][j] = buffer.charAt(k++);
+                        }   
+                        // block_index += 10;
+                        buffer.setLength(0);
+                    }
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found");

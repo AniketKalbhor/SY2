@@ -5,53 +5,48 @@
 	mov rdx,%2
 	syscall
 %endmacro
+printName:
+    mov rax, 01h
+    mov rdi, 01h
+    mov rsi, name
+    mov rdx, nameLength
+    syscall      
+    ret 
 
 section .data
+name db 'Aniket Kalbhor - 48'
+nameLength equ $-name
 msg0 db 10,'How Many Ele :: '
 len0 equ $-msg0
-
 msg1 db 10,'Enter 5 array Elements :'
 len1 equ $-msg1
-
 msg2 db 10,'Before Transfer :'
 len2 equ $-msg2
-
 msg3 db 10,'SRC is ::'
 len3 equ $-msg3
-
 msg4 db 10,'Dest is::'
 len4 equ $-msg4
-
 msg5 db 10,'After Transfer :'
 len5 equ $-msg5
-
-
 space db '  '
-
 
 
 section .bss
 src resb 25
 dest resb 25
 cnt resb 1
-
 display resb 2
 accept resb 3
-
 section .text
 	global _start
 
 _start:
+call printName
 
 	println msg0,len0
 	call acceptNo
 	mov [cnt],bl
-
-
-
-
 	println msg1,len1
-
 	mov cl,[cnt]
 	mov rsi,src
 movNext:
@@ -86,14 +81,9 @@ dispNext:
 	inc rsi
 	dec cl
 	jnz dispNext
-
-
 	println msg4,len4
-
-
 	mov cl,[cnt]
 	mov rsi,dest
-
 dispNext1:	
 	mov bl,[rsi]
 	push rcx
@@ -119,11 +109,8 @@ next:
 	inc rdi
 	dec cl
 	jnz next	
-
-
 	println msg5,len5
 	println msg3,len3
-
 	mov cl,[cnt]
 	mov rsi,src
 
@@ -141,14 +128,9 @@ dispNext2:
 	inc rsi
 	dec cl
 	jnz dispNext2
-
-
 	println msg4,len4
-
-
 	mov cl,[cnt]
 	mov rsi,dest
-
 dispNext3:	
 	mov bl,[rsi]
 	push rcx
@@ -163,8 +145,6 @@ dispNext3:
 	inc rsi
 	dec cl
 	jnz dispNext3
-
-
 	mov rax,60
 	syscall
 
@@ -220,7 +200,5 @@ dontAdd:
 
 dontAddd:
 	mov [display+1],al
-
 	println display,02h
-
 ret

@@ -9,6 +9,14 @@ int hash(int key) {
     return key % TABLE_SIZE;
 }
 
+void displayHashTable() {
+    printf("\n******************************************\n");
+    printf("Hash Table:\n");
+    printf("Index\tValue\n");
+    for (int i = 0; i < TABLE_SIZE; i++)
+        printf("%d\t%d\n", i, hashTable[i]);
+}
+
 void insert(int key) {
     int index, step, i;
 
@@ -28,13 +36,6 @@ void insert(int key) {
     printf("Hash table is full. Element %d cannot be inserted.\n", key);
 }
 
-void displayHashTable() {
-    printf("\n******************************************\n");
-    printf("Hash Table:\n");
-    printf("Index\tValue\n");
-    for (int i = 0; i < TABLE_SIZE; i++)
-        printf("%d\t%d\n", i, hashTable[i]);
-}
 
 int main() {
     int choice, key;

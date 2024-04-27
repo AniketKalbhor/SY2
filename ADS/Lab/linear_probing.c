@@ -5,6 +5,15 @@
 
 int hashTable[TABLE_SIZE] = {0};
 
+
+void displayHashTable() {
+    printf("\n*******************************************\n");
+    printf("Hash Table:\n");
+    printf("Index\tValue\n");
+    for (int i = 0; i < TABLE_SIZE; i++)
+        printf("%d\t%d\n", i, hashTable[i]);
+}
+
 void insert()
 {
     int key, index, i, flag = 0, hashkey;
@@ -30,14 +39,6 @@ void insert()
     {
         printf("Element can't be inserted\n");
     }
-}
-
-void displayHashTable() {
-    printf("\n*******************************************\n");
-    printf("Hash Table:\n");
-    printf("Index\tValue\n");
-    for (int i = 0; i < TABLE_SIZE; i++)
-        printf("%d\t%d\n", i, hashTable[i]);
 }
 
 int main() {

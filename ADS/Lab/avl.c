@@ -9,7 +9,7 @@ struct Node
     int height;
 };
 
-int height(struct Node* root)
+int getHeight(struct Node* root)
 {
     if (root == NULL)
     {
@@ -19,12 +19,12 @@ int height(struct Node* root)
     return root->height;
 }
 
-int max(int a, int b)
+int getMax(int a, int b)
 {
     return(a > b)? a : b;
 }
 
-struct Node* newNode(int key)
+struct Node* createNode(int key)
 {
     struct Node* node = (struct Node*)malloc(sizeof(struct Node));
 
@@ -44,9 +44,9 @@ struct Node* rightRotate(struct Node* y)
     x->right = y;
     y->left = t2;
 
-    y->height = max(height(y->left), height(y->right)) + 1;
+    y->height = getMax(getHeight(y->left), getHeight(y->right)) + 1;
 
-    x->height = max(height(x->left), height(x->right)) + 1;
+    x->height = getMax(getHeight(x->left), getHeight(x->right)) + 1;
 
     return x;
 };
@@ -59,46 +59,46 @@ struct Node* leftRotate(struct Node* x)
     y->left = x;
     x->right = t2;
 
-    x->height = max(height(x->left), height(x->right)) + 1;
+    x->height = getMax(getHeight(x->left), getHeight(x->right)) + 1;
 
-    y->height = max(height(y->left), height(y->right)) + 1;
+    y->height = getMax(getHeight(y->left), getHeight(y->right)) + 1;
 
     return y;
 };
 
-int getBalance(struct Node* root)
+int getBalanceFactor(struct Node* root)
 {
     if (root == NULL)
     {
         return 0;
     }
 
-    return height(root->left) - height(root->right);
+    return getHeight(root->left) - getHeight(root->right);
 }
 
-struct Node* insert(struct Node* root, int key)
+struct Node* insertNode(struct Node* root, int key)
 {
     if (root == NULL)
     {
-        root = newNode(key);
+        root = createNode(key);
     }
 
     if (key < root->data)
     {
-        root->left = insert(root->left, key);
+        root->left = insertNode(root->left, key);
     }
     else if (key > root->data)
     {
-        root->right = insert(root->right, key);
+        root->right = insertNode(root->right, key);
     }
     else
     {
         return root;
     }
 
-    root->height = 1 + max(height(root->left), height(root->right));
+    root->height = 1 + getMax(getHeight(root->left), getHeight(root->right));
 
-    int balance = getBalance(root);
+    int balance = getBalanceFactor(root);
 
     if (balance > 1 && key < root->left->data)
     {
@@ -125,32 +125,32 @@ struct Node* insert(struct Node* root, int key)
     return root;
 };
 
-void preOrder(struct Node *root)
+void preOrderTraversal(struct Node *root)
 {
     if(root != NULL)
     {
         printf("%d ", root->data);
-        preOrder(root->left);
-        preOrder(root->right);
+        preOrderTraversal(root->left);
+        preOrderTraversal(root->right);
     }
 }
 
-void inOrder(struct Node *root)
+void inOrderTraversal(struct Node *root)
 {
     if(root != NULL)
     {
-        inOrder(root->left);
+        inOrderTraversal(root->left);
         printf("%d ", root->data);
-        inOrder(root->right);
+        inOrderTraversal(root->right);
     }
 }
 
-void postOrder(struct Node *root)
+void postOrderTraversal(struct Node *root)
 {
     if(root != NULL)
     {
-        postOrder(root->left);
-        postOrder(root->right);
+        postOrderTraversal(root->left);
+        postOrderTraversal(root->right);
         printf("%d ", root->data);
     }
 }
@@ -164,7 +164,7 @@ int main()
   while (1)
   {
       printf("\n");
-      printf("1. Insert \n2. Traversal\n");
+      printf("1. Insert \t2. Traversal\n");
 
       int choice;
       printf("Choice:");
@@ -175,26 +175,26 @@ int main()
       case 1:
         printf("Enter value to insert:");
         scanf("%d",&n);
-        root = insert(root, n);
+        root = insertNode(root, n);
         break;
       case 2:
         while (1)
 		{
 			printf("\n");
-			printf("1. Inorder \n2. Preorder \n3. Postorder \n4. Exit\n");
+			printf("1. Inorder Traversal\t2. Preorder Traversal\t3. Postorder Traversal\t4. Exit\n");
 			int choice;
 			printf("Choice:");
 			scanf("%d",&choice);
 			switch(choice)
 			{
 				case 1:
-					inOrder(root);
+					inOrderTraversal(root);
 					break;
 				case 2:
-					preOrder(root);
+					preOrderTraversal(root);
 					break;
 				case 3:
-					postOrder(root);
+					postOrderTraversal(root);
 					break;
 				case 4:
 					exit(0);
