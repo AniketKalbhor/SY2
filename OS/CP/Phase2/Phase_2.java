@@ -15,9 +15,9 @@ public class Phase_2 {
             e.printStackTrace();
         }
         obj.load();
-
+        
     }
-
+    
 }
 
 class OS2{
@@ -33,14 +33,16 @@ class OS2{
     //counters
     int TTC;
     int LLC;
-
+    
     //interrupts
-    int SI; //system Interrupt
-    int TI; //Time interrupt
-    int PI; //page interrupt
+    int SI; //system Interrupt = 1 GD, 2 PD, 3 H
+    int TI; //Time interrupt = 0 normal, 2 time limit exceeded
+    int PI; //page interrupt = 1 opcode error, 2 operand error, 3 invalid page fault
     int EM; //errror message;
     
     //miscellaneous
+    public static String inputPath = "/home/aniket-u22/SY2(linux)/OS/CP/Phase2/input.txt";
+    public static String outputPath = "/home/aniket-u22/SY2(linux)/OS/CP/Phase2/output1.txt";
     int mem_ptr;
     int [] used_frames; //keeps track of the frames used
     int temp1;   //temporary usage variable
@@ -141,7 +143,7 @@ class OS2{
                 case 3:
                     if (TI == 0) {
                         System.out.println("page fault");
-                        if (SI == 1 || (IR[0] == 'S' && IR[1] == 'R')) {
+                        if (SI == 1 || (IR[0] == 'S' && IR[1] == 'R')) { //its SR or GD which take 2 units of time for page fault
                             System.out.println("Resolving..");
                             Allocate();
                             TTC++;
@@ -255,7 +257,7 @@ class OS2{
                         buffer_ptr++;
                     }
                     sb.append('\n');
-                    Files.write(Paths.get("/home/aniket-u22/SY2/OS/CP/Phase2/output.txt"), String.valueOf(sb).getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get(outputPath), String.valueOf(sb).getBytes(), StandardOpenOption.APPEND);
 
 
                     buffer_reset();
@@ -274,32 +276,32 @@ class OS2{
 
 
     public void terminate(int EM){
-        String jobDetails = "\n\nJobID: " + pcb.getJobId() + "\tTTL: " + pcb.getTTL() + "\tTLL: " + pcb.getTLL() + "\nTTC: " + TTC + "\tLLC: "+ LLC+"\n";
-        String interrupts = "\nSI: "+SI+"\tPI: "+PI+"\tTI: "+TI+"\n";
+        String jobDetails = "\nJobID: " + pcb.getJobId() + "\nTTL: " + pcb.getTTL() + "\tTLL: " + pcb.getTLL() + "\nTTC: " + TTC + "\tLLC: "+ LLC;
+        String interrupts = "\nSI: "+SI+"\tPI: "+PI+"\tTI: "+TI;
         String cpuDetails = "\nIC: "+IC+"\nIR: "+IR[0]+IR[1]+IR[2]+IR[3] + "\nR: "+R[0]+R[1]+R[2]+R[3] + "\nToggle: "+toggle+"\n";
         try{
             switch (EM){
 
                 case 0:
-                    Files.write(Paths.get("/home/aniket-u22/SY2/OS/CP/Phase2/output.txt"), (jobDetails+interrupts+cpuDetails+"\nTerminated Sucessfully\n\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get(outputPath), (jobDetails+interrupts+cpuDetails+"Terminated Sucessfully\n\n\n").getBytes(), StandardOpenOption.APPEND);
                     break;
                 case 1:
-                    Files.write(Paths.get("/home/aniket-u22/SY2/OS/CP/Phase2/output.txt"), (jobDetails+interrupts+cpuDetails+"\nOut of Data\n\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get(outputPath), (jobDetails+interrupts+cpuDetails+"Out of Data\n\n\n").getBytes(), StandardOpenOption.APPEND);
                     break;
                 case 2:
-                    Files.write(Paths.get("/home/aniket-u22/SY2/OS/CP/Phase2/output.txt"), (jobDetails+interrupts+cpuDetails+"\nLine limit exceeded\n\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get(outputPath), (jobDetails+interrupts+cpuDetails+"Line limit exceeded\n\n\n").getBytes(), StandardOpenOption.APPEND);
                     break;
                 case 3:
-                    Files.write(Paths.get("/home/aniket-u22/SY2/OS/CP/Phase2/output.txt"), (jobDetails+interrupts+cpuDetails+"\nTime Limit Exceeded\n\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get(outputPath), (jobDetails+interrupts+cpuDetails+"Time Limit Exceeded\n\n\n").getBytes(), StandardOpenOption.APPEND);
                     break;
                 case 4:
-                    Files.write(Paths.get("/home/aniket-u22/SY2/OS/CP/Phase2/output.txt"), (jobDetails+interrupts+cpuDetails+ "\nOP code error\n\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get(outputPath), (jobDetails+interrupts+cpuDetails+ "OP code error\n\n\n").getBytes(), StandardOpenOption.APPEND);
                     break;
                 case 5:
-                    Files.write(Paths.get("/home/aniket-u22/SY2/OS/CP/Phase2/output.txt"), (jobDetails+interrupts+cpuDetails+ "\nOperand error\n\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get(outputPath), (jobDetails+interrupts+cpuDetails+ "Operand error\n\n\n").getBytes(), StandardOpenOption.APPEND);
                     break;
                 case 6:
-                    Files.write(Paths.get("/home/aniket-u22/SY2/OS/CP/Phase2/output.txt"), (jobDetails+interrupts+cpuDetails+"\nInvalid page fault\n\n").getBytes(), StandardOpenOption.APPEND);
+                    Files.write(Paths.get(outputPath), (jobDetails+interrupts+cpuDetails+"Invalid page fault\n\n\n").getBytes(), StandardOpenOption.APPEND);
                     break;
 
             }
@@ -476,7 +478,7 @@ class OS2{
     private static BufferedReader reader;
     static {
         try {
-            file = new java.io.File("/home/aniket-u22/SY2/OS/CP/Phase2/input.txt");
+            file = new java.io.File(inputPath);
             reader = new BufferedReader(new FileReader(String.valueOf(file)));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -601,7 +603,7 @@ class OS2{
         }
         System.out.println("PTE is " + i);
 
-        memory[i][0] = '0';
+        memory[i][0] = '0'; //to check for amogus char
         memory[i][3] = (char) (temp2 % 10 + '0');
         temp2 = temp2 / 10;
         memory[i][2] = (char) (temp2 % 10 + '0');
@@ -612,7 +614,7 @@ class OS2{
 
 
     private int realAddress(int VA){
-        if(IR[2]!='ඞ'){
+        if(IR[2]!='ඞ'){//0 to 99
             if((IR[2]-'0'>9) || (IR[2]-'0'<0) || (IR[3]-'0'>9) || (IR[3]-'0'<0)){
                 PI = 2;
                 return -1;

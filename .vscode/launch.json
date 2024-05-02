@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "temp",
+            "request": "launch",
+            "mainClass": "OS.CP.Phase1.temp",
+            "projectName": "SY2(linux)_3467f599"
+        },
+        {
+            "type": "java",
+            "name": "os",
+            "request": "launch",
+            "mainClass": "OS.CP.Phase1.os",
+            "projectName": "SY2(linux)_3467f599"
+        },
+        {
+            "type": "java",
+            "name": "Phase_2",
+            "request": "launch",
+            "mainClass": "OS.CP.Phase2.Phase_2",
+            "projectName": "SY2(linux)_3467f599"
+        },
+        {
+            "type": "java",
             "name": "os2",
             "request": "launch",
             "mainClass": "os2",

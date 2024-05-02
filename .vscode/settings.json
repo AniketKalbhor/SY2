@@ -3,5 +3,7 @@
     "files.associations": {
         "iosfwd": "cpp"
     },
-    "java.debug.settings.onBuildFailureProceed": true
+    "java.debug.settings.onBuildFailureProceed": true,
+    "livePreview.defaultPreviewPath": "/ADS/CP/ADS_CP/ADS/GUI_ADS.html",
+    "cmake.configureOnOpen": false
 }

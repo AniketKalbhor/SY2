@@ -1,7 +1,12 @@
+package OS.CP.Phase1;
+
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 class FileReaderHelper{
-    public static final String filename = "/home/aniket-u22/SY2/OS/CP/Phase1/input2.txt";
+    public static final String filename = "/home/aniket-u22/SY2(linux)/OS/CP/Phase1/input2.txt";
     public static BufferedReader br;
     static {
         try {
@@ -34,7 +39,7 @@ public class temp extends FileReaderHelper{
             System.out.println();
         }
     }
-    public void start_exe() {
+    public void start_exe() throws IOException {
         IC = 0;
         while (true) {
             for (int i = 0; i < 4; i++)
@@ -91,13 +96,13 @@ public class temp extends FileReaderHelper{
         }
     }
     
-    public void MOS() {
+    public void MOS() throws IOException {
         buffer.setLength(0);
         if(SI == 1){
             System.out.println("GD, Read from input device");
             try {
             String data = readLine();
-            System.out.println("**********Data:"+data);
+            System.out.println("**Data:"+data);
             buffer.append(data);
             int i = (IR[2] - 48) * 10 + (IR[3] - 48);
             int k = 0;
@@ -124,6 +129,8 @@ public class temp extends FileReaderHelper{
                 }
                 i++;
             }
+            Files.write(Paths.get("/home/aniket-u22/SY2(linux)/OS/CP/Phase1/output.txt"), String.valueOf(output).getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get("/home/aniket-u22/SY2(linux)/OS/CP/Phase1/output.txt"), String.valueOf("\n\n").getBytes(), StandardOpenOption.APPEND);
             System.out.println(output);
         }
         else if(SI == 3){

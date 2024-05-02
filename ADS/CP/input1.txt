@@ -1,5 +1,1 @@
-$AMJ000200040001
-GD20PD20H
-$DTA
-hEllo WorlD!
-$END0002
+jannu

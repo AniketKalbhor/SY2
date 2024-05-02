@@ -248,6 +248,16 @@ char* decode_string(char* encoded_str, node* root) {
     return decoded_str;
 }
 
+void write_to_file(char* filename, char* data, size_t size) {
+    FILE* file = fopen(filename, "wb");
+    if (!file) {
+        fprintf(stderr, "Error opening file %s.\n", filename);
+        exit(EXIT_FAILURE);
+    }
+    fwrite(data, sizeof(char), size, file);
+    fclose(file);
+}
+
 void print_summary(size_t initial_length, size_t encoded_length, size_t map_size) {
     printf("\nCompression Performance\n");
     printf("Initial length: %zu bits\n", initial_length);
@@ -258,16 +268,15 @@ void print_summary(size_t initial_length, size_t encoded_length, size_t map_size
     printf("Bits saved: %zu\n", initial_length - (encoded_length + map_size));
 }
 
-int main(int argc, char **argv) {
-    if (argc != 2) {
-        printf("Usage: %s <file-to-compress>\n", argv[0]);
-        return 1;
-    }
+int main() {
+    char file_name[256];
+    printf("Enter the name of the file to compress: ");
+    scanf("%s", file_name);
 
     // Open the input file
-    FILE *text = fopen(argv[1], "r");
+    FILE *text = fopen(file_name, "r");
     if (!text) {
-        printf("File not found.\n");
+        printf("File not found: %s\n", file_name);
         return 1;
     }
 
@@ -293,9 +302,9 @@ int main(int argc, char **argv) {
     build_huffman_map(huff_root, &map, code, 0);
 
     // Encode the input file using the Huffman map
-    text = fopen(argv[1], "r");
+    text = fopen(file_name, "r");
     if (!text) {
-        printf("File not found.\n");
+        printf("File not found: %s\n", file_name);
         free_huff_map(map);
         free_node(huff_root);
         return 1;
@@ -305,7 +314,7 @@ int main(int argc, char **argv) {
     fseek(text, 0, SEEK_END);
     size_t file_size = ftell(text);
     fseek(text, 0, SEEK_SET);
-    char file_contents = (char)malloc(file_size + 1);
+    char *file_contents = (char*)malloc(file_size + 1);
     if (!file_contents) {
         fprintf(stderr, "Memory allocation failed.\n");
         fclose(text);
@@ -321,11 +330,14 @@ int main(int argc, char **argv) {
     free(file_contents);
     printf("Encoded string:\n%s\n", encoded);
 
+    // Write the encoded string to a binary file
+    char encoded_file_name[] = "output.binary";
+    write_to_file(encoded_file_name, encoded, strlen(encoded));
+    printf("Encoded output written to %s\n", encoded_file_name);
+
     // Decode the encoded string
     char *decoded = decode_string(encoded, huff_root);
     printf("\nDecoded string:\n%s\n", decoded);
-    free(decoded);
-    free(encoded);
 
     // Calculate the size of the Huffman map
     size_t map_size = 0;
@@ -340,6 +352,9 @@ int main(int argc, char **argv) {
     // Free memory
     free_huff_map(map);
     free_node(huff_root);
+    free(encoded);
+    free(decoded);
 
     return 0;
 }
+

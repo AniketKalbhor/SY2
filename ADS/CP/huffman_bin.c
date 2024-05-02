@@ -167,7 +167,6 @@ void free_node(node* root) {
     free(root);
 }
 
-
 char* encode_string(char* str, huff_map* map) {
     size_t length = strlen(str);
     size_t encoded_length = 0;
@@ -296,7 +295,7 @@ int main() {
     size_t initial_length = 0;
     while (fread(&ch, sizeof(char), 1, text) == 1) {
         increment_char_freq(&freq_map, ch);
-        initial_length += 8;
+        initial_length += 8; //each char has 8 bits
     }
     fclose(text);
 
@@ -354,13 +353,13 @@ int main() {
         packed_data[i / 8] = byte;
     }
 
-    char encoded_file_name[] = "output1.binary";
+    char encoded_file_name[] = "outputTemp.bin";
     write_packed_bits_to_file(encoded_file_name, packed_data, packed_size);
     printf("Encoded output written to %s\n", encoded_file_name);
 
     free(packed_data);
     free(file_contents);
-    free_huff_map(map);
+    // free_huff_map(map);
     free_node(huff_root);
     // free(encoded);
 

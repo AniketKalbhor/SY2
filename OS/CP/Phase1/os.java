@@ -1,7 +1,7 @@
+package OS.CP.Phase1;
 import java.io.*;
-
 class FileReaderHelper{
-    public static final String filename = "/home/aniket/Desktop/SY2/OS/CP/Phase1/input2.txt";
+    public static final String filename = "/home/aniket-u22/SY2(linux)/OS/CP/Phase1/input2.txt";
     public static BufferedReader br;
     static {
         try {
@@ -125,7 +125,7 @@ public class os extends FileReaderHelper{
                 i++;
             }
             try {
-                FileWriter myWriter = new FileWriter("/home/aniket/Desktop/SY2/OS/CP/Phase1/output.txt");
+                FileWriter myWriter = new FileWriter("/home/aniket-u22/SY2(linux)/OS/CP/Phase1/output.txt");
                 myWriter.write(output);
                 myWriter.close();
                 System.out.println("Successfully wrote to the file.");
@@ -184,7 +184,7 @@ public class os extends FileReaderHelper{
                     buffer.setLength(0);
                     printMemory();
                     try {
-                        FileWriter myWriter = new FileWriter("output.txt");
+                        FileWriter myWriter = new FileWriter("/home/aniket-u22/SY2(linux)/OS/CP/Phase1/output.txt");
                         myWriter.write("");
                         myWriter.write("");
                         myWriter.close();
@@ -230,7 +230,7 @@ public class os extends FileReaderHelper{
 
     public static void main(String[] args) {
         try {
-            String outputFilePath = "/home/aniket-u22/SY2/OS/CP/Phase1/out.txt";
+            String outputFilePath = "/home/aniket-u22/SY2(linux)/OS/CP/Phase1/output.txt";
             FileOutputStream fileOutputStream = new FileOutputStream(outputFilePath);
             PrintStream printStream = new PrintStream(fileOutputStream);
             System.setOut(printStream);
