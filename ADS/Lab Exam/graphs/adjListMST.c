@@ -1,0 +1,1 @@
+/*Write a Program to implement Prims' and Kruskal’s algorithm to find minimum spanning tree of a user defined graph. Use Adjacency List to represent a graph.*/

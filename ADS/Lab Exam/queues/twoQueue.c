@@ -1,0 +1,1 @@
+//       Write a Program to implement multiple two queues using array and perform following operations on it. A. Addq, B. Delq, C. Display Queue.

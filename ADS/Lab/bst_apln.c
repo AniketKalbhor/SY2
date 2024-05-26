@@ -63,14 +63,16 @@ void levelDisplay(struct node *root)
     queue[rear++] = root;
     printf("\nLevel order traversal is: ");
     while(front < rear){
-        struct node *temp = queue[front++];
-        printf("%d ", temp->data);
-        if (front == rear)
-            printf("\n");
-        if(temp->l != NULL)
-            queue[rear++] = temp->l;
-        if(temp->r != NULL)
-            queue[rear++] = temp->r;
+        int levelSize = rear - front;
+        for(int i = 0; i < levelSize; i++){
+            struct node *temp = queue[front++];
+            printf("%d ", temp->data);
+            if(temp->l != NULL)
+                queue[rear++] = temp->l;
+            if(temp->r != NULL)
+                queue[rear++] = temp->r;
+        }
+        printf("\n");
     }
 }
 
@@ -96,6 +98,21 @@ void leafNodes(struct node *root)
             printf("%d ", root->data);
         leafNodes(root->l);
         leafNodes(root->r);
+    }
+}
+
+int countLeaf(struct node *root)
+{
+    if(root == NULL)
+        return 0;
+    else{
+        int count;
+        if(root->l == NULL && root->r == NULL)
+            return 1;
+        else
+            count = countLeaf(root->l) + countLeaf(root->r);
+        
+        return count;
     }
 }
 
