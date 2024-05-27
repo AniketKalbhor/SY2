@@ -1,0 +1,381 @@
+1. Change your password to a password you would like to use for the remainder of the semester.
+aniket@Aniket-Linux:~$ passwd
+Changing password for aniket.
+
+2. Display the system’s date.
+aniket@Aniket-Linux:~$ date
+Tue Jan 9 03:16:23 PM IST 2024
+
+3. Count the number of lines in the /etc/passwd file.
+aniket@Aniket-Linux:~$ wc -l /etc/passwd
+49 /etc/passwd
+
+4. Find out who else is on the system.
+aniket@Aniket-Linux:~$ who
+aniket   tty2         2024-01-16 19:48 (tty2)
+
+5. Direct the output of the man pages for the date command to a file named mydate.
+aniket@Aniket-Linux:~$ cd Desktop
+aniket@Aniket-Linux:~/Desktop$ ls
+ Assignment1.odt   hello   hello.asm   hello.o   OOP   SY  'Syllabus_CS_AY2023_24 Version 7.0 Dated 4 Dec 2023.pdf'  'SY Module 4'
+aniket@Aniket-Linux:~/Desktop$ cd 'SY Module 4'
+aniket@Aniket-Linux:~/Desktop/SY Module 4$ cd OS
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ man date > mydate
+
+6. Create a subdirectory called mydir.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ mkdir mydir
+
+7. Move the file mydate into the new subdirectory.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ mv mydate mydir
+
+8. Go to the subdirectory mydir and copy the file mydate to a new file called ourdate
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cd mydir
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS/mydir$ cp mydate ourdate
+
+9. List the contents of mydir.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS/mydir$ ls
+mydate  ourdate
+
+10. Do a long listing on the file ourdate and note the permissions.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS/mydir$ ls -l ourdate
+-rw-rw-r-- 1 aniket aniket 6468 Jan 16 15:33 ourdate
+
+11. Display the name of the current directory starting from the root.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS/mydir$ ls -l ourdate
+-rw-rw-r-- 1 aniket aniket 6468 Jan 16 15:33 ourdate
+(first 3- owner permissions, then group then others)
+
+12. Move the files in the directory mydir back to your home directory.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS/mydir$ mv * ~/
+
+13. Display the first 5 lines of mydate.
+aniket@Aniket-Linux:~$ head -n 5 mydate
+DATE(1)                                                                      User Commands                                                                     DATE(1)
+
+NAME
+       date - print or set the system date and time
+
+
+14. Display the last 8 lines of mydate.
+aniket@Aniket-Linux:~$ tail -n 8 mydate
+       Copyright © 2020 Free Software Foundation, Inc.  License GPLv3+: GNU GPL version 3 or later <https://gnu.org/licenses/gpl.html>.
+       This is free software: you are free to change and redistribute it.  There is NO WARRANTY, to the extent permitted by law.
+
+SEE ALSO
+       Full documentation <https://www.gnu.org/software/coreutils/date>
+       or available locally via: info '(coreutils) date invocation'
+
+GNU coreutils 8.32                                                           February 2022                                                                     DATE(1)
+
+15. Remove the directory mydir.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ rmdir mydir
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ ls
+
+16. Redirect the output of the long listing of files to a file named list.
+aniket@Aniket-Linux:~$ ls -l > list
+aniket@Aniket-Linux:~$ ls
+ Android                 Desktop     FF_180_Project_Registration_and_Progress_Review_Group5.docx     log       Pictures                         snap             Videos
+'Android Studio'         Documents  'Group 2 FF_180_Project_Registration_and_Progress_Review.docx'   Music    "PlayOnLinux's virtual drives"    StudioProjects
+ AndroidStudioProjects   Downloads  'Group 4 FF_180_Project_Registration_and_Progress_Review.docx'   mydate    Public                           Templates
+ cv_debug.log            eyrc_hb     list                                                            ourdate   result-2023-HB-0-20230914.json   trial
+aniket@Aniket-Linux:~$ cat list
+total 284
+drwxrwxr-x  3 aniket aniket   4096 Nov 27 19:43 Android
+drwxrwxr-x  3 aniket aniket   4096 Nov 27 19:39 Android Studio
+drwxrwxr-x  4 aniket aniket   4096 Jan 14 02:27 AndroidStudioProjects
+-rw-r--r--  1 aniket aniket    304 Nov  4 00:45 cv_debug.log
+drwxr-xr-x  4 aniket aniket   4096 Jan 16 15:20 Desktop
+drwxr-xr-x  2 aniket aniket   4096 Sep  8 20:04 Documents
+drwxr-xr-x  9 aniket aniket   4096 Jan 16 15:05 Downloads
+drwxrwxr-x  4 aniket aniket   4096 Oct 10 23:51 eyrc_hb
+-rw-rw-r--  1 aniket aniket  34909 Sep 14 14:15 FF_180_Project_Registration_and_Progress_Review_Group5.docx
+-rw-rw-r--  1 aniket aniket 117798 Sep 14 14:12 Group 2 FF_180_Project_Registration_and_Progress_Review.docx
+-rw-rw-r--  1 aniket aniket  43770 Sep 14 14:11 Group 4 FF_180_Project_Registration_and_Progress_Review.docx
+-rw-rw-r--  1 aniket aniket      0 Jan 16 21:11 list
+drwxrwxr-x  3 aniket aniket   4096 Jan  4 15:06 log
+drwxr-xr-x  2 aniket aniket   4096 Sep  8 20:04 Music
+-rw-rw-r--  1 aniket aniket   6468 Jan 16 15:23 mydate
+-rw-rw-r--  1 aniket aniket   6468 Jan 16 15:33 ourdate
+drwxr-xr-x  4 aniket aniket   4096 Nov 27 12:28 Pictures
+lrwxrwxrwx  1 aniket aniket     38 Nov 27 00:21 PlayOnLinux's virtual drives -> /home/aniket/.PlayOnLinux//wineprefix/
+drwxr-xr-x  2 aniket aniket   4096 Sep  8 20:04 Public
+-rw-rw-r--  1 aniket aniket    540 Sep 14 23:34 result-2023-HB-0-20230914.json
+drwx------ 12 aniket aniket   4096 Jan 10 15:58 snap
+drwxrwxr-x  3 aniket aniket   4096 Nov 27 19:54 StudioProjects
+drwxr-xr-x  2 aniket aniket   4096 Sep  8 20:04 Templates
+drwxrwxr-x  2 aniket aniket   4096 Jan  9 15:56 trial
+drwxr-xr-x  3 aniket aniket   4096 Sep  9 00:05 Videos
+
+17. Select any 5 capitals of states in India and enter them in a file named capitals1. Choose 5
+more capitals and enter them in a file named capitals2. Choose 5 more capitals and enter them in a file named capitals3. Concatenate all 3 files and redirect the output to a file named capitals.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat > capitals1
+Mumbai Kohima Hyderabad Gangtok Guwahati
+^C
+
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat > capitals2
+Chennai Bangalore Agartala Itanagar Shillong
+^C
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat > capitals3
+Amritsar Amaravati Kochi Kavaratti Port Blair
+^C
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat capitals1 capitals2 capitals3 > capitals
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ more capitals
+Mumbai Kohima Hyderabad Gangtok Guwahati
+Chennai Bangalore Agartala Itanagar Shillong
+Amritsar Amaravati Kochi Kavaratti Port Blair
+
+18. Concatenate the file capitals2 at the end of file capitals.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat capitals2 >> capitals
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat capitals
+Mumbai Kohima Hyderabad Gangtok Guwahati
+Chennai Bangalore Agartala Itanagar Shillong
+Amritsar Amaravati Kochi Kavaratti Port Blair
+Chennai Bangalore Agartala Itanagar Shillong
+
+19. Give read and write permissions to all users for the file capitals.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ chmod 666 capitals
+(r-4, w-2, x-1)
+
+20. Give read permissions only to the owner of the file capitals. Open the file, make some
+changes and try to save it. What happens ?
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ chmod 400 capitals
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat capitals1 >> capitals
+bash: capitals: Permission denied
+
+21. Create an alias to concatenate the 3 files capitals1, capitals2, capitals3 and redirect the output to a file named capitals. Activate the alias and make it run.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ alias cat_capitals='cat capitals1 capitals2 capitals3 > capitals'
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ source ~/.bashrc
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat_capitals
+bash: capitals: Permission denied
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ chmod 600 capitals
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat_capitals
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat capitals
+Mumbai Kohima Hyderabad Gangtok Guwahati
+Chennai Bangalore Agartala Itanagar Shillong
+Amritsar Amaravati Kochi Kavaratti Port Blair
+
+22. Find out the number of times the string “the” appears in the file mydate.
+aniket@Aniket-Linux:~/Desktop/SY Module 4$ find ~/ -name mydate
+/home/aniket/mydate
+aniket@Aniket-Linux:~/Desktop/SY Module 4$ cd
+aniket@Aniket-Linux:~$ grep -o -i 'the' mydate | wc -l
+31
+
+23. Find out the line numbers on which the string “date” exists in mydate.
+aniket@Aniket-Linux:~$ grep -o -i 'date' mydate | wc -l
+41
+
+24. Print all lines of mydate except those that have the letter “i” in them.
+aniket@Aniket-Linux:~$ grep -v 'i' mydate
+DATE(1)                                                                      User Commands                                                                     DATE(1)
+
+NAME
+
+SYNOPSIS
+       date [OPTION]... [+FORMAT]
+
+DESCRIPTION
+
+
+       -d, --date=STRING
+
+       --debug
+
+
+
+
+       --rfc-3339=FMT
+
+       -r, --reference=FILE
+
+       -s, --set=STRING
+
+
+
+
+       FORMAT controls the output.  Interpreted sequences are:
+
+
+
+       %A     locale's full weekday name (e.g., Sunday)
+
+
+       %B     locale's full month name (e.g., January)
+
+
+
+       %d     day of month (e.g., 01)
+
+       %D     date; same as %m/%d/%y
+
+       %e     day of month, space padded; same as %_d
+
+
+
+
+       %h     same as %b
+
+       %H     hour (00..23)
+
+       %I     hour (01..12)
+
+       %j     day of year (001..366)
+
+       %k     hour, space padded ( 0..23); same as %_H
+
+       %l     hour, space padded ( 1..12); same as %_I
+
+       %m     month (01..12)
+
+
+
+       %N     nanoseconds (000000000..999999999)
+
+
+
+       %q     quarter of year (1..4)
+
+
+
+
+       %S     second (00..60)
+
+       %t     a tab
+
+
+
+
+
+
+
+
+
+
+       %Y     year
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+EXAMPLES
+
+              $ date --date='@2147483647'
+
+
+
+
+
+DATE STRING
+
+AUTHOR
+
+REPORTING BUGS
+
+COPYRIGHT
+
+SEE ALSO
+
+
+25. List the words of 4 letters from the file mydate.
+aniket@Aniket-Linux:~$ grep -o -w '\w\{4\}' mydate
+DATE
+User
+DATE
+NAME
+date
+date
+time
+date
+date
+time
+
+Etc….
+
+
+26. List 5 states in north east India in a file mystates. List their corresponding capitals in a file
+mycapitals. Use the paste command to join the 2 files.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat > mystates
+Nagaland Manipur Assam Sikkim Meghalaya
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ paste mystates capitals > result.txt
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat result.txt
+Nagaland Manipur Assam Sikkim Meghalaya	Mumbai Kohima Hyderabad Gangtok Guwahati
+	Chennai Bangalore Agartala Itanagar Shillong
+	Amritsar Amaravati Kochi Kavaratti Port Blair
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ 
+
+27. Use the cut command to print the 1 st and 3 rd columns of the /etc/passwd file for all students in this class.
+aniket@Aniket-Linux:~$ cut -f1,3 /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
+proxy:x:13:13:proxy:/bin:/usr/sbin/nologin
+www-data:x:33:33:www-data:/var/www:/usr/sbin/nologin
+backup:x:34:34:backup:/var/backups:/usr/sbin/nologin
+list:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin
+irc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin
+gnats:x:41:41:Gnats Bug-Reporting System (admin):/var/lib/gnats:/usr/sbin/nologin
+nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+systemd-network:x:100:102:systemd Network Management,,,:/run/systemd:/usr/sbin/nologin
+systemd-resolve:x:101:103:systemd Resolver,,,:/run/systemd:/usr/sbin/nologin
+messagebus:x:102:105::/nonexistent:/usr/sbin/nologin
+systemd-timesync:x:103:106:systemd Time Synchronization,,,:/run/systemd:/usr/sbin/nologin
+syslog:x:104:111::/home/syslog:/usr/sbin/nologin
+_apt:x:105:65534::/nonexistent:/usr/sbin/nologin
+tss:x:106:113:TPM software stack,,,:/var/lib/tpm:/bin/false
+uuidd:x:107:116::/run/uuidd:/usr/sbin/nologin
+systemd-oom:x:108:117:systemd Userspace OOM Killer,,,:/run/systemd:/usr/sbin/nologin
+tcpdump:x:109:118::/nonexistent:/usr/sbin/nologin
+avahi-autoipd:x:110:119:Avahi autoip daemon,,,:/var/lib/avahi-autoipd:/usr/sbin/nologin
+usbmux:x:111:46:usbmux daemon,,,:/var/lib/usbmux:/usr/sbin/nologin
+dnsmasq:x:112:65534:dnsmasq,,,:/var/lib/misc:/usr/sbin/nologin
+kernoops:x:113:65534:Kernel Oops Tracking Daemon,,,:/:/usr/sbin/nologin
+avahi:x:114:121:Avahi mDNS daemon,,,:/run/avahi-daemon:/usr/sbin/nologin
+cups-pk-helper:x:115:122:user for cups-pk-helper service,,,:/home/cups-pk-helper:/usr/sbin/nologin
+rtkit:x:116:123:RealtimeKit,,,:/proc:/usr/sbin/nologin
+whoopsie:x:117:124::/nonexistent:/bin/false
+sssd:x:118:125:SSSD system user,,,:/var/lib/sss:/usr/sbin/nologin
+speech-dispatcher:x:119:29:Speech Dispatcher,,,:/run/speech-dispatcher:/bin/false
+fwupd-refresh:x:120:126:fwupd-refresh user,,,:/run/systemd:/usr/sbin/nologin
+nm-openvpn:x:121:127:NetworkManager OpenVPN,,,:/var/lib/openvpn/chroot:/usr/sbin/nologin
+saned:x:122:129::/var/lib/saned:/usr/sbin/nologin
+colord:x:123:130:colord colour management daemon,,,:/var/lib/colord:/usr/sbin/nologin
+geoclue:x:124:131::/var/lib/geoclue:/usr/sbin/nologin
+pulse:x:125:132:PulseAudio daemon,,,:/run/pulse:/usr/sbin/nologin
+gnome-initial-setup:x:126:65534::/run/gnome-initial-setup/:/bin/false
+hplip:x:127:7:HPLIP system user,,,:/run/hplip:/bin/false
+gdm:x:128:134:Gnome Display Manager:/var/lib/gdm3:/bin/false
+aniket:x:1000:1000:Aniket,,,:/home/aniket:/bin/bash
+_flatpak:x:129:137:Flatpak system-wide installation helper,,,:/nonexistent:/usr/sbin/nologin
+
+28. Count the number of people logged in and also trap the users in a file using the tee command.
+aniket@Aniket-Linux:~$ who | tee logged_users | wc -l
+1
+
+ 
+29. Convert the contents of mystates into uppercase.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ tr '[:lower:]' '[:upper:]' < mystates > mystates_uppercase
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ cat mystates_uppercase
+NAGALAND MANIPUR ASSAM SIKKIM MEGHALAYA
+
+30. Create any two files & display the common values between them.
+aniket@Aniket-Linux:~/Desktop/SY Module 4/OS$ grep -F -f capitals result.txt
+Nagaland Manipur Assam Sikkim Meghalaya	Mumbai Kohima Hyderabad Gangtok Guwahati
+	Chennai Bangalore Agartala Itanagar Shillong
+	Amritsar Amaravati Kochi Kavaratti Port Blair
