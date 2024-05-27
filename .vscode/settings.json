@@ -1,7 +1,8 @@
 {
     "cmake.sourceDirectory": "/home/aniket/Desktop/SY2/OS/ref/rPhase1",
     "files.associations": {
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "stdio.h": "c"
     },
     "java.debug.settings.onBuildFailureProceed": true,
     "livePreview.defaultPreviewPath": "/ADS/CP/ADS_CP/ADS/GUI_ADS.html",

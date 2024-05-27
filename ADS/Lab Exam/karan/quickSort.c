@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int partition(int arr[], int low, int high)
+int partition(int arr[], int low, int high, int* swaps)
 {
     int pivot = arr[low];
     int i = low + 1;
@@ -25,6 +25,8 @@ int partition(int arr[], int low, int high)
             arr[i] = arr[j];
             arr[j] = temp;
 
+            (*swaps)++; // Increment the swaps count
+
             i++;
             j--;
         }
@@ -37,14 +39,14 @@ int partition(int arr[], int low, int high)
     return j;
 }
 
-void quickSort(int arr[], int low, int high)
+void quickSort(int arr[], int low, int high, int* swaps)
 {
     if (low < high)
     {
-        int pivotIndex = partition(arr, low, high);
+        int pivotIndex = partition(arr, low, high, swaps);
 
-        quickSort(arr, 0, pivotIndex - 1);
-        quickSort(arr, pivotIndex + 1, high);
+        quickSort(arr, low, pivotIndex - 1, swaps);
+        quickSort(arr, pivotIndex + 1, high, swaps);
     }
 }
 
@@ -72,11 +74,16 @@ int main()
 
     printf("\n");
 
-    quickSort(arr, 0, size-1);
+    int swaps = 0; // Initialize swaps count
+    quickSort(arr, 0, size-1, &swaps);
 
     printf("Sorted array:\n");
     for (int i = 0;i < size;i++)
     {
         printf(" %d",arr[i]);
     }
+
+    printf("\nNumber of swaps performed: %d\n", swaps);
+
+    return 0;
 }
