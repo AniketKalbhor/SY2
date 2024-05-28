@@ -12,8 +12,7 @@ void roundRobin(struct Process* processes, int n, int quantum) {
     int completedProcesses = 0;
     while (completedProcesses < n) {
         for (int i = 0; i < n; i++) {
-            if (!processes[i].completed && processes[i].arrivalTime <= currentTime &&
-                processes[i].remainingTime > 0) {
+            if (!processes[i].completed && processes[i].arrivalTime <= currentTime && processes[i].remainingTime > 0) {
                 // Execute the process for the quantum time or for its remaining time, whichever is smaller
                 int executeTime = (processes[i].remainingTime < quantum) ? processes[i].remainingTime : quantum;
                 processes[i].remainingTime -= executeTime;
@@ -30,17 +29,16 @@ void roundRobin(struct Process* processes, int n, int quantum) {
     }
 }
 
-    void sortProcessesByArrivalTime(struct Process* processes, int n) {
-    // Simple bubble sort to sort processes based on arrival time
-        for (int i = 0; i < n - 1; i++) {
-            for (int j = 0; j < n - i - 1; j++) {
-            if (processes[j].arrivalTime > processes[j + 1].arrivalTime) {
-                // Swap
-                struct Process temp = processes[j];
-                processes[j] = processes[j + 1];
-                processes[j + 1] = temp;
+void sortProcessesByArrivalTime(struct Process* processes, int n) {
+// Simple bubble sort to sort processes based on arrival time
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++)
+        if (processes[j].arrivalTime > processes[j + 1].arrivalTime) {
+            // Swap
+            struct Process temp = processes[j];
+            processes[j] = processes[j + 1];
+            processes[j + 1] = temp;
             }
-        }
     }
 }
 

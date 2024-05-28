@@ -11,9 +11,7 @@ void SJF(struct Node* arr, int n)
 {
     // Sorting processes based on burst time
     for (int i = 0; i < n - 1; i++)
-    {
         for (int j = 0; j < n - i - 1; j++)
-        {
             if (arr[j].burstTime > arr[j + 1].burstTime)
             {
                 // Swap burst times
@@ -26,8 +24,6 @@ void SJF(struct Node* arr, int n)
                 arr[j].id = arr[j + 1].id;
                 arr[j + 1].id = temp;
             }
-        }
-    }
 
     printf("Order of Execution:\n");
     printf("Process ID\tBurst Time\tTurnaround Time\n");

@@ -20,13 +20,11 @@ void SRTF(struct Node* processes, int n) {
         int shortestIndex = -1;
 
         // Find the process with the shortest remaining time
-        for (int i = 0; i < n; i++) {
-            if (!processes[i].completed && processes[i].arrivalTime <= currentTime &&
-                processes[i].remainingTime < shortestRemainingTime) {
+        for (int i = 0; i < n; i++)
+            if (!processes[i].completed && processes[i].arrivalTime <= currentTime && processes[i].remainingTime < shortestRemainingTime) {
                 shortestRemainingTime = processes[i].remainingTime;
                 shortestIndex = i;
             }
-        }
 
         if (shortestIndex == -1) {
             currentTime++;

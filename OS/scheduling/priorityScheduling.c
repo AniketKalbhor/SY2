@@ -19,20 +19,13 @@ void priorityScheduling(struct Node* arr, int n)
 {
     int turnaroundTime = 0;
     for (int i = 0; i < n-1; i++)
-    {
         for (int j = 0; j < n-i-1; j++)
-        {
             if (arr[j].priority > arr[j+1].priority)
-            {
                 swap(&arr[j], &arr[j+1]);
-            }
-        }
-    }
 
     printf("Order of Execution:\n");
     printf("Process ID\tBurst Time\tPriority\tTurnaround Time\n");
-    for (int i = 0; i < n; i++)
-    {
+    for (int i = 0; i < n; i++){
         turnaroundTime += arr[i].time;
         printf("%d\t\t%d\t\t%d\t\t%d\n", arr[i].id, arr[i].time, arr[i].priority, turnaroundTime);
     }
