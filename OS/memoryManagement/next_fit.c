@@ -34,11 +34,8 @@ void nextFit()
     int completed = 0;
 
     for (int i = 0; i < MAX_PROCESSES; i++)
-    {
         if (processCompletion[i] == 0)
-        {
-            while (currentSlot < MAX_SLOTS && completed < MAX_SLOTS)
-            {
+            while (currentSlot < MAX_SLOTS && completed < MAX_SLOTS){
                 if (processRequirements[i] <= availableMemory[currentSlot])
                 {
                     printf("Process %d assigned to slot %d\n", i, currentSlot);
@@ -46,13 +43,9 @@ void nextFit()
                     availableMemory[currentSlot] -= processRequirements[i];
                     break;
                 }
-
                 currentSlot = (currentSlot + 1) % MAX_SLOTS; // Move to the next slot
                 completed++;
             }
-        }
-    }
-
     for (int i = 0; i < MAX_PROCESSES; i++)
     {
         if (processCompletion[i] == 0)
