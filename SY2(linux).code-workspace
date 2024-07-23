@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "SY2(linux)"
+		},
+		{
+			"path": "../../mnt/c/Users/anika/OneDrive/Desktop/SY2(windows)"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"iosfwd": "cpp"
+		},
+		"java.debug.settings.onBuildFailureProceed": true,
+		"liveServer.settings.multiRootWorkspaceName": "SY2(linux)"
+	}
+}
